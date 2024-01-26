@@ -1,4 +1,5 @@
 using System.Collections;
+using Code.Scripts.Gate;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +10,7 @@ namespace Code.Scripts.Player
         [SerializeField] private GameObject prefab;
         [SerializeField] private Transform point;
         [SerializeField] private float timeReload = 1;
+        [SerializeField] private PlayerScore score;
 
         public UnityEvent<GameObject> reloaded;
 
@@ -30,6 +32,7 @@ namespace Code.Scripts.Player
             {
                 shell.SetPhysics(false);
             }
+            shell.id = score.id;
             newObj.transform.localPosition = Vector3.zero;
             reloaded.Invoke(newObj);
         }
