@@ -11,12 +11,7 @@ namespace Code.Scripts.Player
         [SerializeField] private float maximumVert = 45.0f;
         private float _rotationX = 0;
         
-        private void Start()
-        {
-            PlayerInputSingle.Input.Player.CameraMove.performed += Move;
-        }
-
-        private void Move(InputAction.CallbackContext context)
+        public void Move(InputAction.CallbackContext context)
         {
             Vector2 value = context.ReadValue<Vector2>();
             _rotationX = Mathf.Clamp(

@@ -23,12 +23,7 @@ namespace Code.Scripts.Player
             reloader.reloaded.RemoveListener(GetReload);
         }
 
-        private void Start()
-        {
-            PlayerInputSingle.Input.Player.Shoot.performed += Shoot;
-        }
-        
-        private void Shoot(InputAction.CallbackContext context)
+        public void Shoot(InputAction.CallbackContext context)
         {
             if(!_shell)
                 return;

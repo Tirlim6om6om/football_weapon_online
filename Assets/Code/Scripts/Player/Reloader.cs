@@ -30,6 +30,7 @@ namespace Code.Scripts.Player
             {
                 shell.SetPhysics(false);
             }
+            newObj.transform.localPosition = Vector3.zero;
             reloaded.Invoke(newObj);
         }
     }
