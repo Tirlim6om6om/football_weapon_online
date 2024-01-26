@@ -1730,7 +1730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  textScore: {fileID: 0}
+  textScore: {fileID: 390528174}
 --- !u!1 &1779544292
 GameObject:
   m_ObjectHideFlags: 0
