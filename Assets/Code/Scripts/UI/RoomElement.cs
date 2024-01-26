@@ -1,3 +1,5 @@
+using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 
@@ -7,16 +9,18 @@ namespace Code.Scripts.UI
     {
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI countPlayerText;
+        private RoomInfo _roomInfo;
 
-        public void SetInfo(string nameServer, string count)
+        public void SetInfo(RoomInfo roomInfo)
         {
-            nameText.text = nameServer;
-            countPlayerText.text = count;
+            nameText.text = roomInfo.Name;
+            countPlayerText.text = roomInfo.PlayerCount + " / " + roomInfo.MaxPlayers;
+            _roomInfo = roomInfo;
         }
 
         public void Connect()
         {
-            
+            PhotonNetwork.JoinRoom(_roomInfo.Name);
         }
     }
 }

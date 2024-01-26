@@ -3309,5 +3309,9 @@ namespace Photon.Pun
 
         #endif
 
+        public static GameObject Instantiate(string prefabName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
