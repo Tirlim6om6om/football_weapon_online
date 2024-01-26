@@ -1,4 +1,5 @@
 using System.Collections;
+using Code.Scripts.Ball;
 using Code.Scripts.Gate;
 using UnityEngine;
 using UnityEngine.Events;

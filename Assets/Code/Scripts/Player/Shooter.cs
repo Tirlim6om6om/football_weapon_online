@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
+using Code.Scripts.Ball;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Code.Scripts.Player
 {

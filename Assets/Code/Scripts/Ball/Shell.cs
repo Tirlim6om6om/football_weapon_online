@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Scripts.Player
+namespace Code.Scripts.Ball
 {
     public abstract class Shell : MonoBehaviour
     {

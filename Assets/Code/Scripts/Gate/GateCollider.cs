@@ -1,5 +1,6 @@
+using Code.Scripts.Ball;
 using Code.Scripts.Gate;
-using Code.Scripts.Player;
+
 using UnityEngine;
 
 public class GateCollider : MonoBehaviour
