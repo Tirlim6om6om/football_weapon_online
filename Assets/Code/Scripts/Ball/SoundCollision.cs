@@ -17,7 +17,6 @@ namespace Code.Scripts.Ball
 
         private void OnCollisionEnter(Collision collision)
         {
-            print("play");
             _source.volume = _rb.velocity.magnitude / 100;
             _source.Play();
         }
