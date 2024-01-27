@@ -8,12 +8,12 @@ namespace Code.Scripts.Network
 {
     public class LobbyManager : MonoBehaviourPunCallbacks
     {
-        private string _playerName = "Player 1";
-        private string _gameVersion = "0.9";
+        private string _gameVersion = "0.1";
         
         private void Start()
         {
             PhotonNetwork.AutomaticallySyncScene = true;
+            PhotonNetwork.NickName = "Player_" + Random.Range(1000, 9999); 
             if (!PhotonNetwork.IsConnected)
             {
                 PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = _gameVersion;
@@ -23,7 +23,6 @@ namespace Code.Scripts.Network
         
         public override void OnConnectedToMaster()
         {
-            Debug.Log("OnConnectedToMaster");
             PhotonNetwork.JoinLobby(TypedLobby.Default);
         }
         

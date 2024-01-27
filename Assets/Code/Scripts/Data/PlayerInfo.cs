@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
-namespace Code.Scripts.UI
+namespace Code.Scripts.Data
 {
     public class PlayerInfo
     {
@@ -8,6 +9,8 @@ namespace Code.Scripts.UI
         public string id;
         public int idColor;
         public GameObject panel;
+        public delegate void OnChange(int value);
+        public event OnChange ColorChange;
 
         public PlayerInfo(string nickname, string id, int idColor, GameObject panel)
         {
@@ -15,6 +18,12 @@ namespace Code.Scripts.UI
             this.id = id;
             this.idColor = idColor;
             this.panel = panel;
+        }
+
+        public void SetColor(int newId)
+        {
+            idColor = newId;
+            ColorChange?.Invoke(idColor);
         }
     }
 }

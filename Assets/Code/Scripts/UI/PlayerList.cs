@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Code.Scripts.Data;
 using Photon.Pun;
 using UnityEngine;
 
@@ -8,34 +10,38 @@ namespace Code.Scripts.UI
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private Transform parent;
-        
-        private List<PlayerInfo> players = new List<PlayerInfo>();
-        
+
+        private void Start()
+        {
+            UpdateList();
+        }
+
         public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
         {
-            GameObject newPanel = PhotonNetwork.Instantiate("PlayerElement");//TODO доработать
-            newPanel.transform.parent = parent;
-            PlayerInfo newPlayerInfo = new PlayerInfo(newPlayer.NickName, newPlayer.UserId, players.Count, newPanel);
-            players.Add(newPlayerInfo);
-            newPanel.TryGetComponent(out PlayerElement playerElement);
-            playerElement.SetInfo(newPlayerInfo);
+           UpdateList();
         }
 
         public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
         {
-            players.Remove(GetPlayer(otherPlayer.UserId));
+            UpdateList();
         }
 
-        private PlayerInfo GetPlayer(string userId)
+        private void UpdateList()
         {
+            Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
+            PlayerDB.instance.Clear();
+
             foreach (var player in players)
             {
-                if (player.id == userId)
-                {
-                    return player;
-                }
+                //GameObject newPanel = PhotonNetwork.Instantiate(prefab.name, parent.position, Quaternion.identity);
+                GameObject newPanel = Instantiate(prefab, parent);
+                newPanel.transform.parent = parent;
+                PlayerInfo newPlayerInfo = new PlayerInfo(player.NickName, 
+                    player.UserId, PlayerDB.instance.GetFirstIdColor(), newPanel);
+                PlayerDB.instance.AddPlayer(newPlayerInfo);
+                newPanel.TryGetComponent(out PlayerElement playerElement);
+                playerElement.SetInfo(newPlayerInfo);
             }
-            return null;
         }
     }
 }
