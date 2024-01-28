@@ -9,6 +9,9 @@ namespace Code.Scripts.Network
     {
         [SerializeField] private GameObject cam;
         [SerializeField] private GameObject canvas;
+        [SerializeField] private WeaponController weaponController;
+        [SerializeField] private Shooter shooter;
+        [SerializeField] private Reloader reloader;
 
         private void Start()
         {
@@ -26,6 +29,9 @@ namespace Code.Scripts.Network
                 Destroy(audioListener);
             }
             Destroy(canvas);
+            Destroy(weaponController);
+            Destroy(shooter);
+            Destroy(reloader);
         }
     }
 }

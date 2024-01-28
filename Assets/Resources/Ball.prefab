@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -6390150668665130902}
   - component: {fileID: 7944279999830932620}
   - component: {fileID: 8233870986474386055}
-  - component: {fileID: 2457199974874377726}
+  - component: {fileID: 2693662572163662655}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -279,11 +279,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 2457199974874377726}
+  - {fileID: 2693662572163662655}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2457199974874377726
+--- !u!114 &2693662572163662655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,10 +292,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6850558686107463136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3

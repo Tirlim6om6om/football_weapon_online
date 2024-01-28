@@ -491,6 +491,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 8390753123270748802}
   canvas: {fileID: 3755882423433937131}
+  weaponController: {fileID: 5175918942377067291}
+  shooter: {fileID: 5280789015371310510}
+  reloader: {fileID: 4757966970732735392}
 --- !u!1 &6262366054796469667
 GameObject:
   m_ObjectHideFlags: 0
