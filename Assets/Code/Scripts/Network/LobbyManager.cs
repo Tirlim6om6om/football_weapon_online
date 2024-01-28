@@ -28,7 +28,7 @@ namespace Code.Scripts.Network
         
         public void CreateRoom(string roomName)
         {
-            PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = 4 });
+            PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = 4, PublishUserId = true});
         }
 
         public override void OnJoinedRoom()

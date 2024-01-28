@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.Scripts.Data
 {
-    public class PlayerDB : MonoBehaviour, IPunObservable
+    public class PlayerDB : MonoBehaviour
     {
         public static PlayerDB instance;
         private List<PlayerInfo> _playersInfo = new List<PlayerInfo>();
@@ -19,6 +19,7 @@ namespace Code.Scripts.Data
             else
             {
                 instance = this;
+                DontDestroyOnLoad(transform.root.gameObject);
             }
         }
 
@@ -80,10 +81,23 @@ namespace Code.Scripts.Data
             }
             return 0;
         }
-        
-        [PunRPC]
+
         public void AddColor(string id, int add)
         {
+            if (TryGetComponent(out PhotonView view))
+            {
+                view.RPC(nameof(ChangeColor), RpcTarget.All, id, add);
+            }
+        }
+    
+        [PunRPC]
+        private void ChangeColor(string id, int add)
+        {
+            foreach (var player in _playersInfo)
+            {
+                print("Id: " + player.nickname + player.id);
+            }
+            print(id);
             PlayerInfo playerInfo = GetPlayer(id);
             int newId = playerInfo.idColor + add;
             if (newId == 4)
@@ -91,26 +105,6 @@ namespace Code.Scripts.Data
             if (newId == -1)
                 newId = 3;
             playerInfo.SetColor(GetFirstIdColor(newId));
-        }
-        
-        
-        //TODO ДОДЕЛАТЬ
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            if (stream.IsWriting)
-            {
-                foreach (var playerInfo in _playersInfo)
-                {
-                    stream.SendNext(playerInfo.idColor);
-                }
-            }
-            else
-            {
-                foreach (var playerInfo in _playersInfo)
-                {
-                    playerInfo.SetColor((int)stream.ReceiveNext());
-                }
-            }
         }
     }
 }
