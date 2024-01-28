@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Code.Scripts.Gate;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Code.Scripts.Data
@@ -9,6 +10,8 @@ namespace Code.Scripts.Data
         public string id;
         public int idColor;
         public GameObject panel;
+        public PlayerScore score;
+        
         public delegate void OnChange(int value);
         public event OnChange ColorChange;
 

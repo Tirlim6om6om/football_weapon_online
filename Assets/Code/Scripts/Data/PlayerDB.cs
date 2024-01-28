@@ -93,11 +93,6 @@ namespace Code.Scripts.Data
         [PunRPC]
         private void ChangeColor(string id, int add)
         {
-            foreach (var player in _playersInfo)
-            {
-                print("Id: " + player.nickname + player.id);
-            }
-            print(id);
             PlayerInfo playerInfo = GetPlayer(id);
             int newId = playerInfo.idColor + add;
             if (newId == 4)

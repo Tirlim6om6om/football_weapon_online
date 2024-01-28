@@ -17,6 +17,7 @@ namespace Code.Scripts.Player
             _shell.transform.parent = null;
             _shell.SetPhysics(true);
             _shell.Kick(point.forward * force * forceInput);
+            BallsManager.instance.AddBall(_shell);
             _shell = null;
             return true;
         }

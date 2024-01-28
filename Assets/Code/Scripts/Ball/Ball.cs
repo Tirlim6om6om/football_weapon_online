@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 
 namespace Code.Scripts.Ball
@@ -14,11 +16,6 @@ namespace Code.Scripts.Ball
             TryGetComponent(out _rb);
         }
 
-        private void Start()
-        {
-            BallsManager.instance.AddBall(this);
-        }
-
         public override void SetPhysics(bool active)
         {
             _rb.isKinematic = !active;
@@ -27,11 +24,6 @@ namespace Code.Scripts.Ball
         public override void Kick(Vector3 axis)
         {
             _rb.AddForce(axis * multiplyForce);
-        }
-
-        public void Destroy()
-        {
-            Destroy(gameObject);
         }
     }
 }

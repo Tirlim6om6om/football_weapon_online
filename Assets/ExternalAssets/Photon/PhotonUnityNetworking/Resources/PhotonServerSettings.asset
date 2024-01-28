@@ -41,6 +41,9 @@ MonoBehaviour:
   - RespawnSpaceship
   - AddColor
   - ChangeColor
+  - Minus
+  - Plus
+  - UpdateScore
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

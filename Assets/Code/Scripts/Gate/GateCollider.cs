@@ -1,17 +1,26 @@
 using Code.Scripts.Ball;
-using Code.Scripts.Gate;
-
+using Code.Scripts.Data;
+using Photon.Pun;
 using UnityEngine;
 
-public class GateCollider : MonoBehaviour
+namespace Code.Scripts.Gate
 {
-    [SerializeField] private PlayerScore player;
-    
-    private void OnCollisionEnter(Collision collision)
+    public class GateCollider : MonoBehaviour
     {
-        if (collision.gameObject.TryGetComponent(out Shell shell))
+        [SerializeField] private PhotonView view;
+        
+        private void OnCollisionEnter(Collision collision)
         {
-            player.ChangePoints(shell.id);
+            if (collision.gameObject.TryGetComponent(out Shell shell))
+            {
+                PlayerInfo playerInfoGate = PlayerDB.instance.GetPlayer(view.Owner.UserId);
+                shell.TryGetComponent(out PhotonView shellView);
+                PlayerInfo playerInfoShell = PlayerDB.instance.GetPlayer(shellView.Owner.UserId);
+                playerInfoGate.score.Minus();
+                print(playerInfoGate.nickname);
+                if(playerInfoGate != playerInfoShell)
+                    playerInfoShell.score.Plus();
+            }
         }
     }
 }
