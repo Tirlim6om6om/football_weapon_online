@@ -7,6 +7,7 @@ namespace Code.Scripts.Network
     {
         public void LoadMain()
         {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.LoadLevel("Main");
         }
     }

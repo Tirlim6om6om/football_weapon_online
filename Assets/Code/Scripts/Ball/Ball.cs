@@ -24,6 +24,15 @@ namespace Code.Scripts.Ball
         public override void Kick(Vector3 axis)
         {
             _rb.AddForce(axis * multiplyForce);
+            if (TryGetComponent(out PhotonView view))
+            {
+                view.RPC(nameof(AddBallManager), RpcTarget.All);
+            }
+        }
+
+        [PunRPC]
+        private void AddBallManager()
+        {
             BallsManager.instance.AddBall(this);
         }
     }

@@ -11,8 +11,9 @@ namespace Code.Scripts.Ball
         public static BallsManager instance;
 
         [SerializeField] private int maxBalls = 15;
-        
         [SerializeField] private List<Shell> balls;
+
+        private PhotonView _view;
 
         private void Awake()
         {
@@ -24,6 +25,8 @@ namespace Code.Scripts.Ball
             {
                 instance = this;
             }
+
+            TryGetComponent(out _view);
         }
 
         public void AddBall(Shell ball)
@@ -37,7 +40,8 @@ namespace Code.Scripts.Ball
 
         private IEnumerator DeleteFirst()
         {
-            PhotonNetwork.Destroy(balls[0].gameObject);
+            //PhotonNetwork.Destroy(balls[0].gameObject);
+            Destroy(balls[0].gameObject);
             yield return new WaitWhile(() => balls[0].gameObject == null);
             balls.Remove(balls[0]);
         }
