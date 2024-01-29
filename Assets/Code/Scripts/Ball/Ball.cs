@@ -24,6 +24,7 @@ namespace Code.Scripts.Ball
         public override void Kick(Vector3 axis)
         {
             _rb.AddForce(axis * multiplyForce);
+            BallsManager.instance.AddBall(this);
         }
     }
 }

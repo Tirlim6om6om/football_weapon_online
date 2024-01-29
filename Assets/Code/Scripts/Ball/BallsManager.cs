@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
@@ -30,9 +31,15 @@ namespace Code.Scripts.Ball
             balls.Add(ball);
             if (balls.Count > maxBalls)
             {
-                PhotonNetwork.Destroy(balls[0].gameObject);
-                balls.Remove(balls[0]);
+                StartCoroutine(DeleteFirst());
             }
+        }
+
+        private IEnumerator DeleteFirst()
+        {
+            PhotonNetwork.Destroy(balls[0].gameObject);
+            yield return new WaitWhile(() => balls[0].gameObject == null);
+            balls.Remove(balls[0]);
         }
     }
 }

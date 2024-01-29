@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Code.Scripts.Network;
 using Photon.Pun;
@@ -12,14 +13,23 @@ namespace Code.Scripts.UI
         [SerializeField] private GameObject prefab;
         [SerializeField] private Transform parent;
         [SerializeField] private List<GameObject> rooms = new List<GameObject>();
-
+        private bool _processing;
 
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
-            foreach (var room in rooms)
+            StartCoroutine(UpdatingList(roomList));
+        }
+
+        private IEnumerator UpdatingList(List<RoomInfo> roomList)
+        {
+            yield return new WaitWhile(() => _processing);
+            _processing = true;
+            for (int i = 0; i < rooms.Count; i++)
             {
-                Destroy(room);
+                Destroy(rooms[i]);
+                yield return new WaitWhile(() => rooms[i] != null);
             }
+
             rooms = new List<GameObject>();
             
             foreach (var roomInfo in roomList)
@@ -29,6 +39,7 @@ namespace Code.Scripts.UI
                 roomElement.SetInfo(roomInfo);
                 rooms.Add(newRoom);
             }
+            _processing = false;
         }
     }
 }
