@@ -8,15 +8,18 @@ namespace Code.Scripts.Player
 {
     public class Reloader : MonoBehaviour
     {
+        public UnityEvent<GameObject> reloaded;
+        
         [SerializeField] private GameObject prefab;
         [SerializeField] private Transform point;
         [SerializeField] private float timeReload = 1;
         [SerializeField] private PlayerScore score;
 
-        public UnityEvent<GameObject> reloaded;
-
+        private Spawner _spawner;
+        
         private void Start()
         {
+            TryGetComponent(out _spawner);
             Reload();
         }
 
@@ -28,7 +31,9 @@ namespace Code.Scripts.Player
         private IEnumerator Reloading()
         {
             yield return new WaitForSeconds(timeReload);
-            GameObject newObj = Instantiate(prefab, point.position, point.rotation, point);
+            GameObject newObj = _spawner.Spawn(prefab, point);
+            newObj.transform.parent = point;
+            newObj.transform.localPosition = Vector3.zero;
             if (newObj.TryGetComponent(out Shell shell))
             {
                 shell.SetPhysics(false);

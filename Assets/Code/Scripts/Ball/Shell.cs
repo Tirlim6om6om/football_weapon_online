@@ -7,5 +7,6 @@ namespace Code.Scripts.Ball
         [HideInInspector] public int id;
         public abstract void SetPhysics(bool active);
         public abstract void Kick(Vector3 axis);
+        
     }
 }
